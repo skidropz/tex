@@ -1,0 +1,70 @@
+/* Frosted glass discret, doar pe antet și bara de scriere (nu pe lista de mesaje).
+   Suprafețele folosesc culorile fiecărei teme; telefoanele au un blur mai mic. */
+@supports (backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px)) {
+  :root:not(.mobile-ui):not(.theme-ym):not([data-wall^="liquidGlass"]) :is(.th-head, .composer) {
+    background: color-mix(in srgb, var(--frost-chrome-bg, var(--panel)) var(--frost-chrome-alpha, 86%), transparent) !important;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  /* Bara clasică Yahoo rămâne gradientul propriu; doar compozitorul capătă sticlă. */
+  html.theme-ym .composer {
+    background: color-mix(in srgb, var(--ym-tool) 88%, transparent) !important;
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+  }
+  /* Pe telefon sunt doar două zone mici blurate, nu panoul întreg sau mesajele. */
+  html.mobile-ui:not(.theme-ym) :is(.th-head, .composer) {
+    background: color-mix(in srgb, var(--frost-chrome-bg, var(--chat-bg)) var(--frost-mobile-alpha, 88%), transparent) !important;
+    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+  html.mobile-ui.theme-ym .composer {
+    -webkit-backdrop-filter: blur(4px) !important;
+    backdrop-filter: blur(4px) !important;
+  }
+}
+/* Eliminăm conturul textarea decupat lângă emoticoane, fără alt contur adăugat. */
+:root:not(.theme-ym) .cmp-input textarea:focus-visible { outline: none; }
+/* În Liquid Glass luminos, o umplere neutră distinge câmpul de bara albă. */
+html[data-wall="liquidGlass"] .cmp-input { background: rgba(216,226,238,.85) !important; }
+@media (prefers-reduced-transparency: reduce) {
+  :root:not(.mobile-ui):not(.theme-ym):not([data-wall^="liquidGlass"]) :is(.th-head, .composer) {
+    background: var(--frost-chrome-bg, var(--panel)) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+  html.mobile-ui:not(.theme-ym) :is(.th-head, .composer) { background: var(--frost-chrome-bg, var(--chat-bg)) !important; }
+  html.theme-ym .composer {
+    background: var(--ym-tool) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+/* Albastru Neon: chrome aproape negru ca în referință; albastrul rămâne pe bule,
+   accente și contururi, nu în câmpurile de scriere sau de căutare. */
+:root[data-wall="albastruNeon"] {
+  --frost-chrome-bg: #03070c;
+  --frost-chrome-alpha: 98%;
+  --frost-mobile-alpha: 98%;
+  --neon-field-bg: #080d14;
+  --neon-bar-line: rgba(56, 186, 255, .18);
+}
+:root[data-wall="albastruNeon"] .app :is(.sb-head, .me-bar, .find-bar) {
+  background: var(--frost-chrome-bg) !important;
+  border-color: var(--neon-bar-line);
+}
+:root[data-wall="albastruNeon"] .app :is(.sb-search, .sb-search input, .cmp-input, .find-bar input) {
+  background: var(--neon-field-bg) !important;
+  border-color: var(--neon-bar-line) !important;
+  color: var(--text);
+}
+:root[data-wall="albastruNeon"] :is(.emo-head input, .sp-msg input) {
+  background: var(--neon-field-bg) !important;
+  border-color: var(--neon-bar-line);
+  color: var(--text);
+}
+:root[data-wall="albastruNeon"] :is(.sb-search input, .find-bar input, .emo-head input, .sp-msg input, .cmp-input textarea)::placeholder {
+  color: #a9c2d4;
+  opacity: 1;
+}

@@ -1,0 +1,18 @@
+--- a/lib/bootstrap.php
++++ b/lib/bootstrap.php
+@@ -19,6 +19,7 @@
+ require_once __DIR__ . '/contact-info.php';
+ require_once __DIR__ . '/admin.php';
+ require_once __DIR__ . '/fcm.php'; // v2.1.6: push FCM (Android)
++require_once __DIR__ . '/apns.php'; // iOS APNs; se instalează separat, fără a modifica FCM
+ 
+ // erori neprinse: le scriem în log-ul PHP și răspundem cu JSON curat (fără detalii interne)
+ set_exception_handler(function (Throwable $e): void {
+@@ -695,6 +696,7 @@
+     if ($ownTransaction) $pdo->commit();
+     // v2.1.6: push FCM către ceilalți membri (trimis după răspuns; nu și expeditorului)
+     if ($msg) fcm_notify_message($convId, $uid, $msg);
++    if ($msg) apns_notify_message($convId, $uid, $msg);
+     return $msg;
+     } catch (Throwable $e) { if ($ownTransaction && $pdo->inTransaction()) $pdo->rollBack(); throw $e; }
+ }

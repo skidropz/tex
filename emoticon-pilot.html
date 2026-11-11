@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comparație emoticoane animate</title>
+<style>
+  :root { color-scheme: light; font: 15px/1.5 system-ui,sans-serif; color:#25282d; background:#f4f5f6; }
+  body { max-width:1060px; padding:32px; margin:auto; }
+  h1 { font-size:25px; font-weight:600; margin:0 0 8px; }
+  p { color:#565b62; margin:0 0 24px; max-width:760px; }
+  .row { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px; margin:0 0 24px; }
+  .card { padding:16px; background:white; border:1px solid #dce0e4; border-radius:12px; min-width:0; }
+  .card h2 { font-size:13px; font-weight:600; margin:0 0 12px; }
+  .stage { height:120px; display:grid; place-items:center; background:#e9ebee; border-radius:8px; }
+  .stage img { display:block; width:96px; height:96px; object-fit:contain; }
+  .stage.small { height:52px; margin-top:8px; }
+  .stage.small img { width:28px; height:28px; }
+  .label { font-size:13px; color:#686d74; margin:18px 0 8px; }
+  small { display:block; margin-top:10px; color:#72777d; }
+  @media(max-width:720px) { body{padding:16px;} .row{grid-template-columns:repeat(2,minmax(0,1fr));} }
+</style>
+</head>
+<body>
+<h1>Yahoo! Messenger — probă de calitate</h1>
+<p>GIF-ul original are numai 18×18 px. Varianta actuală este deja xBR 8×; interpolarea fidelă păstrează animația, dar nu poate inventa detalii. Prototipurile SVG de mai jos sunt redesenări animate, nu emoticoane oficiale Yahoo!</p>
+<div class="label">Happy</div>
+<div class="row">
+  <div class="card"><h2>Original · GIF</h2><div class="stage"><img src="assets/emoticons/happy.gif" alt="Happy original"></div><div class="stage small"><img src="assets/emoticons/happy.gif" alt=""></div><small>18×18 px</small></div>
+  <div class="card"><h2>Actual · xBR</h2><div class="stage"><img src="assets/emoticons/hd/happy.webp" alt="Happy xBR"></div><div class="stage small"><img src="assets/emoticons/hd/happy.webp" alt=""></div><small>WebP 8×</small></div>
+  <div class="card"><h2>Pilot · interpolare</h2><div class="stage"><img src="assets/emoticons/hd-candidate-v4/happy.webp" alt="Happy interpolat"></div><div class="stage small"><img src="assets/emoticons/hd-candidate-v4/happy.webp" alt=""></div><small>WebP 8×, cadre păstrate</small></div>
+  <div class="card"><h2>Prototip fidel · SVG</h2><div class="stage"><img src="assets/emoticons/prototypes/happy.svg" alt="Happy vectorial"></div><div class="stage small"><img src="assets/emoticons/prototypes/happy.svg" alt=""></div><small>96×96, animat</small></div>
+</div>
+<div class="label">Winking</div>
+<div class="row">
+  <div class="card"><h2>Original · GIF</h2><div class="stage"><img src="assets/emoticons/winking.gif" alt="Winking original"></div><div class="stage small"><img src="assets/emoticons/winking.gif" alt=""></div><small>18×18 px</small></div>
+  <div class="card"><h2>Actual · xBR</h2><div class="stage"><img src="assets/emoticons/hd/winking.webp" alt="Winking xBR"></div><div class="stage small"><img src="assets/emoticons/hd/winking.webp" alt=""></div><small>WebP 8×</small></div>
+  <div class="card"><h2>Pilot · interpolare</h2><div class="stage"><img src="assets/emoticons/hd-candidate-v4/winking.webp" alt="Winking interpolat"></div><div class="stage small"><img src="assets/emoticons/hd-candidate-v4/winking.webp" alt=""></div><small>WebP 8×, cadre păstrate</small></div>
+  <div class="card"><h2>Prototip fidel · SVG</h2><div class="stage"><img src="assets/emoticons/prototypes/winking.svg" alt="Winking vectorial"></div><div class="stage small"><img src="assets/emoticons/prototypes/winking.svg" alt=""></div><small>96×96, animat</small></div>
+</div>
+<p>Originalele Yahoo! Messenger sunt păstrate ca referință și fallback. Niciun WebP din colecția activă nu a fost înlocuit.</p>
+</body>
+</html>

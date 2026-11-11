@@ -1,0 +1,196 @@
+/* Tex 2.2 — tema „Liquid Glass”.
+   Sticla este făcută din trei straturi: (1) refracție reală a ceea ce e în spate, printr-un filtru SVG
+   cu hartă de deplasare generată pe dimensiunea fiecărui element (assets/js/liquid-glass.js), cu
+   aberație cromatică pe margini; (2) estompare + saturație; (3) lumină pe muchie și umbră.
+   Fără refracție (Safari, Firefox, telefon, „reduce transparency”) rămâne varianta estompată. */
+
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) { --lg-ink: #203449; --lg-edge: rgba(255,255,255,.62); }
+
+/* ---------- scena din spate: pete de culoare care se mișcă încet ---------- */
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .app { position: relative; isolation: isolate; background: var(--chat-wall); }
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .app::before {
+  content: ""; position: absolute; inset: -18%; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(closest-side at 18% 24%, rgba(96,150,255,.55), transparent),
+    radial-gradient(closest-side at 82% 18%, rgba(255,150,205,.48), transparent),
+    radial-gradient(closest-side at 74% 82%, rgba(90,215,190,.5), transparent),
+    radial-gradient(closest-side at 24% 84%, rgba(170,140,255,.46), transparent);
+  background-size: 62% 62%, 58% 58%, 66% 66%, 54% 54%; background-repeat: no-repeat;
+  background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+  animation: lg-drift 36s ease-in-out infinite alternate;
+}
+@keyframes lg-drift { from { transform: translate3d(-2%, -1%, 0) rotate(0deg); } to { transform: translate3d(3%, 2%, 0) rotate(6deg); } }
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .app > * { z-index: 1; }
+
+/* ---------- sticla ---------- */
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.sidebar, .th-head, .composer, .modal-card, .popover, .as-panel, .jump-btn) {
+  background: rgba(255,255,255,.26) !important;
+  border: 1px solid var(--lg-edge) !important;
+  -webkit-backdrop-filter: blur(18px) saturate(1.7); backdrop-filter: blur(18px) saturate(1.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(255,255,255,.28), inset 0 0 26px rgba(255,255,255,.2),
+    0 12px 36px rgba(38,68,108,.18), 0 1px 3px rgba(38,68,108,.14) !important;
+  color: var(--lg-ink);
+}
+html.lg-real:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.sidebar, .th-head, .composer, .modal-card, .popover, .as-panel, .jump-btn) {
+  -webkit-backdrop-filter: var(--lg-filter, blur(18px) saturate(1.7)); backdrop-filter: var(--lg-filter, blur(18px) saturate(1.7));
+}
+/* lumina de pe muchie: un inel subțire, mai puternic în colțurile opuse (ca reflexia pe sticlă) */
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.sidebar, .th-head, .composer)::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px; pointer-events: none; z-index: 8;
+  background: linear-gradient(135deg, rgba(255,255,255,.95), rgba(255,255,255,0) 28%, rgba(255,255,255,0) 72%, rgba(255,255,255,.75));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .sb-head, html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .me-bar, html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .sb-search input, html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .cmp-input {
+  background: rgba(255,255,255,.34) !important; border-color: rgba(255,255,255,.6) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.8) !important;
+}
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .e2e-banner { background: rgba(255,236,190,.55); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,.6); }
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .conv.active { background: rgba(255,255,255,.5) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.9), 0 4px 14px rgba(38,68,108,.12); }
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .conv:hover { background: rgba(255,255,255,.3); }
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .sb-head .add-btn, html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .btn.primary {
+  background: linear-gradient(180deg, rgba(110,160,235,.95), rgba(60,108,190,.95)); color: #fff; border: 1px solid rgba(255,255,255,.55);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 6px 16px rgba(52,98,176,.3);
+}
+
+/* ---------- bule de sticlă ---------- */
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .row.in .bubble:not(.media):not(.buzz) {
+  background: rgba(255,255,255,.44) !important; color: var(--lg-ink) !important;
+  border: 1px solid rgba(255,255,255,.75) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.6); backdrop-filter: blur(10px) saturate(1.6);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.95), inset 0 -8px 14px rgba(255,255,255,.14), 0 6px 18px rgba(38,68,108,.12) !important;
+}
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .row.out .bubble:not(.media):not(.buzz) {
+  background: linear-gradient(180deg, rgba(88,140,222,.84), rgba(48,94,176,.86)) !important; background-attachment: scroll !important; color: #fff !important;
+  border: 1px solid rgba(255,255,255,.5) !important;
+  -webkit-backdrop-filter: blur(10px) saturate(1.8); backdrop-filter: blur(10px) saturate(1.8);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), inset 0 -8px 14px rgba(20,50,110,.18), 0 8px 20px rgba(48,94,176,.3) !important;
+}
+
+/* ---------- desktop: antetul și bara de scriere plutesc peste conversație ---------- */
+@media (min-width: 901px) {
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .app { padding: 12px; gap: 12px; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .sidebar { border-radius: var(--panel-radius, 28px); overflow: visible; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .chat {
+    background: rgba(255,255,255,.14) !important; border: 1px solid rgba(255,255,255,.5); border-radius: var(--panel-radius, 28px); overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.7), 0 14px 40px rgba(38,68,108,.14);
+  }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .thread { position: relative; padding-top: 96px; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .messages-wrap { position: absolute; inset: 0; z-index: 1; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .messages { padding: 100px 8px 100px !important; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .th-head { position: absolute; top: 12px; left: 12px; right: 12px; z-index: 6; min-height: 72px !important; padding: 12px 16px !important; border-radius: 32px; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .composer { position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 6; min-height: 72px; padding: 11px 16px !important; border-radius: 32px; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .cmp-input { border-radius: 20px; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) :is(.find-bar, .pinned-bar, .history-context, .contact-banner) { position: relative; z-index: 5; margin: 0 12px 12px; border-radius: 16px; border: 1px solid rgba(255,255,255,.6); background: rgba(255,255,255,.5); backdrop-filter: blur(14px); }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) :is(.reply-strip, .contact-gate-notice) { position: absolute; left: 12px; right: 12px; bottom: 96px; z-index: 7; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .jump-btn { bottom: 96px; }
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mq-narrow) .chat-empty { z-index: 2; }
+}
+@media (prefers-reduced-motion: reduce) { html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .app::before { animation: none; } }
+@media (prefers-reduced-transparency: reduce) {
+  html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.sidebar, .th-head, .composer, .modal-card, .popover, .as-panel, .jump-btn) { background: rgba(247,250,253,.94) !important; backdrop-filter: none; -webkit-backdrop-filter: none; }
+}
+
+/* ================= varianta întunecată ================= */
+html[data-wall="liquidGlassDark"] { --lg-ink: #e8eef8; --lg-edge: rgba(255,255,255,.2); --text: #e8eef8; --muted: #a2b2c8; --line: rgba(255,255,255,.13); --input-bg: rgba(255,255,255,.08); --sent-solid: #ffffff !important; --reaction-accent: #ffffff !important; }
+html[data-wall="liquidGlassDark"] .app::before {
+  background:
+    radial-gradient(closest-side at 18% 24%, rgba(255,255,255,.26), transparent),
+    radial-gradient(closest-side at 82% 18%, rgba(255,255,255,.12), transparent),
+    radial-gradient(closest-side at 74% 82%, rgba(200,200,210,.2), transparent),
+    radial-gradient(closest-side at 24% 84%, rgba(255,255,255,.1), transparent);
+  background-size: 62% 62%, 58% 58%, 66% 66%, 54% 54%; background-repeat: no-repeat; background-position: 0 0, 100% 0, 100% 100%, 0 100%;
+}
+html[data-wall="liquidGlassDark"] :is(.sidebar, .th-head, .composer, .modal-card, .popover, .as-panel, .jump-btn) {
+  background: rgba(255,255,255,.07) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -1px 0 rgba(255,255,255,.06), inset 0 0 26px rgba(255,255,255,.05), 0 14px 40px rgba(0,0,0,.45), 0 1px 3px rgba(0,0,0,.4) !important;
+}
+html[data-wall="liquidGlassDark"] :is(.sidebar, .th-head, .composer)::after {
+  background: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,0) 28%, rgba(255,255,255,0) 72%, rgba(255,255,255,.45));
+}
+html[data-wall="liquidGlassDark"] :is(.sb-head, .me-bar, .sb-search input, .cmp-input) { background: rgba(255,255,255,.07) !important; border-color: rgba(255,255,255,.16) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.18) !important; color: var(--lg-ink); }
+html[data-wall="liquidGlassDark"] .e2e-banner { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); color: #e6e6ea; }
+html[data-wall="liquidGlassDark"]:not(.theme-ym) :is(.sb-head .add-btn, .btn.primary) { background: linear-gradient(180deg, #ffffff, #cfd0d6); color: #101012; border-color: rgba(255,255,255,.7); box-shadow: inset 0 1px 0 #fff, 0 6px 16px rgba(0,0,0,.4); }
+html[data-wall="liquidGlassDark"] .conv.active { background: rgba(255,255,255,.13) !important; box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 4px 14px rgba(0,0,0,.3); }
+html[data-wall="liquidGlassDark"] .conv:hover { background: rgba(255,255,255,.07); }
+html[data-wall="liquidGlassDark"] .row.in .bubble:not(.media):not(.buzz) {
+  background: rgba(255,255,255,.1) !important; color: #eef3fb !important; border-color: rgba(255,255,255,.2) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.3), inset 0 -8px 14px rgba(255,255,255,.03), 0 6px 18px rgba(0,0,0,.3) !important;
+}
+html[data-wall="liquidGlassDark"] .row.out .bubble:not(.media):not(.buzz) {
+  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(214,216,222,.9)) !important; color: #101012 !important;
+  box-shadow: inset 0 1px 0 #fff, inset 0 -8px 14px rgba(0,0,0,.08), 0 8px 22px rgba(0,0,0,.45) !important;
+}
+@media (min-width: 901px) {
+  html[data-wall="liquidGlassDark"]:not(.mq-narrow) .chat { background: rgba(255,255,255,.03) !important; border-color: rgba(255,255,255,.16); box-shadow: inset 0 1px 0 rgba(255,255,255,.2), 0 14px 40px rgba(0,0,0,.4); }
+  html[data-wall="liquidGlassDark"]:not(.mq-narrow) :is(.find-bar, .pinned-bar, .history-context, .contact-banner) { background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.16); color: var(--lg-ink); }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html[data-wall="liquidGlassDark"] :is(.sidebar, .th-head, .composer, .modal-card, .popover, .as-panel, .jump-btn) { background: rgba(22,30,46,.96) !important; }
+}
+
+/* BUZZ în sticlă: aceeași culoare ca bulele trimise */
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) .row .bubble.buzz {
+  background: linear-gradient(180deg, rgba(88,140,222,.86), rgba(48,94,176,.88)) !important; color: #fff !important;
+  border: 1px solid rgba(255,255,255,.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.6), 0 8px 20px rgba(48,94,176,.3);
+}
+
+html[data-wall="liquidGlassDark"] .row .bubble.buzz {
+  background: linear-gradient(180deg, rgba(255,255,255,.94), rgba(214,216,222,.9)) !important; color: #101012 !important;
+  border-color: rgba(255,255,255,.7); box-shadow: inset 0 1px 0 #fff, 0 8px 22px rgba(0,0,0,.45);
+}
+html[data-wall="liquidGlassDark"] .snip-buzz { color: #ffffff; }
+
+/* ferestre și meniuri: mult mai multă estompare, ca textul de dedesubt să nu mai se vadă */
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.popover, .modal-card, .as-panel) {
+  background: rgba(255,255,255,.62) !important;
+  -webkit-backdrop-filter: blur(32px) saturate(1.7); backdrop-filter: blur(32px) saturate(1.7);
+}
+html.lg-real:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.popover, .modal-card, .as-panel) {
+  -webkit-backdrop-filter: var(--lg-filter, blur(32px) saturate(1.7)); backdrop-filter: var(--lg-filter, blur(32px) saturate(1.7));
+}
+html[data-wall="liquidGlassDark"] :is(.popover, .modal-card, .as-panel) { background: rgba(16,16,20,.68) !important; }
+
+html:is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.reply-strip.on, .contact-gate-notice) { background: rgba(255,255,255,.7) !important; border-color: rgba(255,255,255,.6) !important; -webkit-backdrop-filter: blur(24px) saturate(1.6); backdrop-filter: blur(24px) saturate(1.6); }
+html[data-wall="liquidGlassDark"] :is(.reply-strip.on, .contact-gate-notice) { background: rgba(16,16,20,.74) !important; border-color: rgba(255,255,255,.16) !important; }
+
+/* Safari/WebKit nu refractă backdrop-ul prin url(#SVG). Pe desktop construim o
+   lentilă CSS statică: material, caustică și muchie dublă, fără canvas/loop. */
+@media (min-width: 901px) {
+  html:not(.lg-real):is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mobile-ui) :is(.th-head, .composer) {
+    background: linear-gradient(160deg, rgba(255,255,255,.86), rgba(237,246,255,.67) 48%, rgba(218,234,250,.76)) !important;
+    border-color: rgba(255,255,255,.92) !important;
+    -webkit-backdrop-filter: blur(11px) saturate(1.35) contrast(1.04);
+    backdrop-filter: blur(11px) saturate(1.35) contrast(1.04);
+    box-shadow: inset 0 2px 1px rgba(255,255,255,.95), inset 0 -3px 5px rgba(91,137,177,.22), 0 12px 28px rgba(29,54,82,.18) !important;
+    isolation: isolate;
+  }
+  html:not(.lg-real):is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mobile-ui) :is(.th-head, .composer)::before {
+    content: ""; position: absolute; inset: 1px; z-index: 0; border-radius: inherit; pointer-events: none;
+    background: radial-gradient(ellipse 65% 75% at 20% -35%, rgba(255,255,255,.8), transparent 75%),
+      linear-gradient(110deg, rgba(255,255,255,.34), transparent 32%, transparent 66%, rgba(156,195,233,.22));
+  }
+  html:not(.lg-real):is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mobile-ui) :is(.th-head, .composer) > * { position: relative; z-index: 1; }
+  html:not(.lg-real):is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]):not(.mobile-ui) :is(.th-head, .composer)::after {
+    padding: 2px;
+    background: linear-gradient(135deg, #fff, rgba(255,255,255,.15) 32%, rgba(121,174,218,.4) 73%, rgba(255,255,255,.92));
+  }
+  html:not(.lg-real)[data-wall="liquidGlassDark"]:not(.mobile-ui) :is(.th-head, .composer) {
+    background: linear-gradient(160deg, rgba(50,59,78,.88), rgba(20,27,41,.79) 48%, rgba(38,48,65,.86)) !important;
+    border-color: rgba(255,255,255,.32) !important;
+    box-shadow: inset 0 2px 1px rgba(255,255,255,.36), inset 0 -3px 5px rgba(0,0,0,.32), 0 14px 30px rgba(0,0,0,.42) !important;
+  }
+  html:not(.lg-real)[data-wall="liquidGlassDark"]:not(.mobile-ui) :is(.th-head, .composer)::before {
+    background: radial-gradient(ellipse 65% 75% at 20% -35%, rgba(255,255,255,.28), transparent 75%),
+      linear-gradient(110deg, rgba(255,255,255,.16), transparent 32%, transparent 66%, rgba(255,255,255,.08));
+  }
+  html:not(.lg-real)[data-wall="liquidGlassDark"]:not(.mobile-ui) :is(.th-head, .composer)::after {
+    background: linear-gradient(135deg, rgba(255,255,255,.7), rgba(255,255,255,.08) 32%, rgba(180,199,225,.22) 73%, rgba(255,255,255,.5));
+  }
+}
+@media (prefers-reduced-transparency: reduce) {
+  html:not(.lg-real)[data-wall="liquidGlass"] :is(.th-head, .composer) { background: #e9eef5 !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  html:not(.lg-real)[data-wall="liquidGlassDark"] :is(.th-head, .composer) { background: #1a202d !important; -webkit-backdrop-filter: none !important; backdrop-filter: none !important; }
+  html:not(.lg-real):is([data-wall="liquidGlass"],[data-wall="liquidGlassDark"]) :is(.th-head, .composer)::before { display: none; }
+}

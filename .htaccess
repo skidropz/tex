@@ -1,0 +1,62 @@
+# VORBITozaur — configurare Apache (cPanel)
+Options -Indexes
+DirectoryIndex index.php
+
+# ---------------------------------------------------------------------------
+# v2.0: HTTPS obligatoriu
+# Certificatul SSL NU îl emite aplicația: în cPanel -> „SSL/TLS Status” rulează
+# AutoSSL (sau „Let's Encrypt SSL”) pentru domeniu. Abia după ce https:// merge,
+# redirectul de mai jos e sigur. /.well-known/ rămâne pe http pentru validarea
+# certificatului (ACME / AutoSSL). Funcționează și în spatele Cloudflare/proxy.
+# ---------------------------------------------------------------------------
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_URI} !^/\.well-known/
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} !^(localhost|127\.0\.0\.1)(:\d+)?$ [NC]
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "same-origin"
+  Header always set Permissions-Policy "camera=(self), microphone=(self), geolocation=()"
+  # HSTS (1 an) doar pe conexiuni HTTPS. Șterge rândul dacă vrei să mai poți reveni la http.
+  Header always set Strict-Transport-Security "max-age=31536000" env=HTTPS
+  <FilesMatch "sw\.js$">
+    Header set Service-Worker-Allowed "./"
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+  <FilesMatch "\.(css|js|gif|svg|png|webp|ico|mp3)$">
+    Header set Cache-Control "public, max-age=604800"
+  </FilesMatch>
+</IfModule>
+
+# Blochează fișiere sensibile
+<FilesMatch "(\.md|\.sql|\.sqlite|\.lock|\.part|\.bin|\.example\.php|router\.php|service-account.*\.json|\.cache\.php)$">
+  Require all denied
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteRule ^(config|lib|data|sql|uploads)(/|$) - [F,L]
+</IfModule>
+
+# MIME corecte
+AddType application/javascript .js
+AddType image/svg+xml .svg
+AddType image/webp .webp
+AddType audio/mpeg .mp3
+AddType application/manifest+json .webmanifest
+
+# Recomandări PHP pentru long-poll și upload în bucăți (pe unele hosturi se setează din "MultiPHP INI Editor")
+<IfModule mod_php.c>
+  php_value post_max_size 16M
+  php_value upload_max_filesize 16M
+  php_value max_execution_time 120
+  php_flag output_buffering off
+</IfModule>
+<IfModule mod_deflate.c>
+  SetEnvIfNoCase Request_URI "api/(poll|file)\.php" no-gzip dont-vary
+</IfModule>

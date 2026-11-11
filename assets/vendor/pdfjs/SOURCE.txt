@@ -1,0 +1,2 @@
+Official Mozilla PDF.js pdfjs-dist 6.5.438 from https://registry.npmjs.org/pdfjs-dist/-/pdfjs-dist-6.5.438.tgz
+Official legacy browser/worker (compatibility polyfills); .mjs renamed .js for conventional hosting MIME, bytes unchanged. Browser/worker and standard fonts vendored unchanged. Apache2.0 LICENSE included. No runtime CDN.

@@ -1,0 +1,46 @@
+/* Tex2.1.21: presentation only, shared by login recovery and account setup. */
+.forgot-dialog,#recoverySetup,#recoveryInvite,.recovery-section {
+ --recovery-surface:#fff;--recovery-text:#172334;--recovery-muted:#526174;--recovery-input:#f3f6fa;--recovery-border:#c5d0df;--recovery-note:#edf4ff;--recovery-error:#a52534;
+}
+[data-theme="dark"] :is(.forgot-dialog,#recoverySetup,#recoveryInvite,.recovery-section) {
+ --recovery-surface:#131e2d;--recovery-text:#edf3ff;--recovery-muted:#b0bfd2;--recovery-input:#0b1522;--recovery-border:#41536c;--recovery-note:#152e49;--recovery-error:#ffc1c8;
+}
+.forgot-card,.forgot-card *,#recoverySetup,#recoverySetup *,#recoveryInvite .modal-card,#recoveryInvite .modal-card * {box-sizing:border-box;min-width:0;}
+.forgot-dialog {position:fixed;inset:0;z-index:500;display:grid;place-items:center;padding:12px;background:rgba(0,0,0,.58);overflow-y:auto;overscroll-behavior:contain;}
+.forgot-card {width:min(100%,480px);max-height:calc(100vh - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain;padding:22px;border:1px solid var(--recovery-border);border-radius:18px;background:var(--recovery-surface);color:var(--recovery-text);box-shadow:0 18px 60px #0004;text-align:left;}
+.forgot-card header {display:flex;align-items:flex-start;justify-content:space-between;gap:12px;position:static;}
+.forgot-card h2 {margin:0;font-size:20px;line-height:1.3;overflow-wrap:anywhere;}
+.forgot-card h3 {margin:0;font-size:14px;line-height:1.4;color:var(--recovery-text);}
+.forgot-card form,#recoverySetup {display:grid;grid-template-columns:minmax(0,1fr);gap:14px;position:static;height:auto;max-width:100%;margin:18px 0 0;padding:0;}
+.forgot-card label,#recoverySetup .field {display:grid;grid-template-columns:minmax(0,1fr);gap:7px;margin:0;color:var(--recovery-text);font-size:13px;line-height:1.5;font-weight:500;}
+.forgot-card input:not([type="checkbox"]),#recoverySetup input {width:100%;max-width:100%;min-width:0;min-height:44px;margin:0;padding:11px 12px;border:1px solid var(--recovery-border);border-radius:10px;background:var(--recovery-input);color:var(--recovery-text);font:inherit;outline:none;backdrop-filter:none;-webkit-backdrop-filter:none;}
+.forgot-card input:not([type="checkbox"]):focus,#recoverySetup input:focus {background:var(--recovery-input);color:var(--recovery-text);border-color:#3188e8;box-shadow:0 0 0 3px #3188e833;}
+.forgot-card button,#recoverySetup button[type="submit"],#recoveryInvite .btn {min-height:44px;max-width:100%;margin:0;padding:11px 14px;border:1px solid transparent;border-radius:10px;background:#1766cb;color:#fff;font:600 14px/1.4 system-ui,sans-serif;cursor:pointer;white-space:normal;overflow-wrap:anywhere;box-shadow:none;}
+.forgot-card form > button,#recoverySetup button[type="submit"] {width:100%;}
+.forgot-card #forgotClose,#recoveryInvite #recoveryLater {flex:none;background:var(--recovery-input);color:var(--recovery-text);border-color:var(--recovery-border);}
+.forgot-card button:disabled,#recoverySetup button:disabled {opacity:.6;cursor:wait;}
+.forgot-card :is(button,input):focus-visible,#recoverySetup :is(button,input):focus-visible,#recoveryInvite button:focus-visible {outline:2px solid #3188e8;outline-offset:3px;}
+.forgot-card .recovery-note,.recovery-section > p,#recoveryInvite p {margin:14px 0 0;color:var(--recovery-muted);font-size:13px;line-height:1.6;opacity:1;overflow-wrap:anywhere;}
+.forgot-card form .recovery-note {margin:0;padding:12px;border:1px solid var(--recovery-border);border-radius:10px;background:var(--recovery-note);color:var(--recovery-text);}
+.forgot-card .recovery-help,#recoverySetup .muted {margin:0;font-size:12px;line-height:1.5;color:var(--recovery-muted);}
+.recovery-question {padding:12px;border:1px solid var(--recovery-border);border-radius:10px;background:var(--recovery-note);overflow-wrap:anywhere;}
+.recovery-question > span {display:block;margin-bottom:5px;font-size:12px;color:var(--recovery-muted);}
+#forgotQuestion {margin:0;color:var(--recovery-text);font-size:15px;font-weight:600;line-height:1.5;white-space:pre-wrap;}
+.forgot-card label.recovery-ack {display:flex;flex-direction:row;align-items:flex-start;gap:10px;font-size:13px;line-height:1.5;}
+.forgot-card .recovery-ack input[type="checkbox"] {appearance:auto;flex:0 0 18px;width:18px;height:18px;min-height:18px;margin:2px 0 0;padding:0;box-shadow:none;border-radius:3px;accent-color:#1766cb;backdrop-filter:none;-webkit-backdrop-filter:none;}
+.forgot-card .recovery-ack span {flex:1;min-width:0;overflow-wrap:anywhere;}
+#forgotError {margin:14px 0 0;padding:10px 12px;border:1px solid currentColor;border-radius:9px;color:var(--recovery-error);font-size:13px;line-height:1.5;overflow-wrap:anywhere;}
+#forgotError:empty,#recoveryInfo:empty {display:none;}
+.recovery-section {margin-top:12px;padding:16px;border:1px solid var(--recovery-border);border-radius:12px;background:var(--recovery-surface);color:var(--recovery-text);}
+.recovery-section h4 {color:var(--recovery-text);line-height:1.4;}
+#recoveryInfo:not(:empty) {padding:10px;border-radius:8px;background:var(--recovery-note);color:var(--recovery-text);}
+#recoveryInvite .modal-card {max-width:430px;max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);padding:22px;gap:12px;overflow-y:auto;overscroll-behavior:contain;background:var(--recovery-surface);color:var(--recovery-text);border:1px solid var(--recovery-border);text-align:left;}
+#recoveryInvite h3,#recoveryInvite p {margin:0;line-height:1.5;}
+#recoveryInvite .row-btns {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:6px;}
+@media(max-width:380px){.forgot-card{padding:16px;}.forgot-card header{flex-wrap:wrap;}.forgot-card header button{margin-left:auto;}#recoveryInvite .row-btns{grid-template-columns:minmax(0,1fr);}}
+
+/* 2.1.30: breathing room inside the Settings security page. */
+#settings #recoverySetup { gap: 18px; margin-top: 8px; }
+#settings .recovery-section p { margin: 0; line-height: 1.6; }
+
+html.mobile-ui #recoverySetup input, html.mobile-ui .forgot-card input:not([type="checkbox"]) { font-size: 16px; }

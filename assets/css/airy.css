@@ -1,0 +1,151 @@
+/* Tex 2.2 — aerisire: spațiu, ritm și tipografie.
+   Nu schimbă culori: fiecare temă își păstrează paleta. Toate valorile sunt multipli de 4.
+   Pe telefon (≤ 900px) rămân marginile compacte din atelier.css. */
+
+:root:not(.theme-ym) { --radius-big: 20px; --radius-small: 6px; }
+
+body { font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+
+/* ---------- mesaje ---------- */
+:root:not(.theme-ym) .bubble { padding: 10px 16px; font-size: 15.5px; line-height: 1.5; }
+:root:not(.theme-ym) .bubble.jumbo { padding: 4px 0; }
+:root:not(.theme-ym) .row { margin-top: 3px; gap: 12px; }
+:root:not(.theme-ym) .row.group-start { margin-top: 20px; }
+:root:not(.theme-ym) .row.has-reactions { margin-bottom: 20px; }
+:root:not(.theme-ym) .sep { margin: 32px 0 20px; font-size: 12px; letter-spacing: .01em; }
+:root:not(.theme-ym) .msg-time { font-size: 11px; }
+:root:not(.theme-ym) .conv-intro { padding: 48px 16px 40px; }
+:root:not(.theme-ym) .conv-intro h3 { font-size: 20px; font-weight: 500; letter-spacing: -.01em; margin-bottom: 4px; }
+:root:not(.theme-ym) .conv-intro .muted { line-height: 1.6; }
+
+/* ---------- liste și etichete ---------- */
+:root:not(.theme-ym) .tag-new { background: none; color: var(--muted); border-radius: 0; padding: 0; margin-left: 8px; font-size: 12px; font-weight: 500; text-transform: none; letter-spacing: 0; vertical-align: baseline; }
+:root:not(.theme-ym) .e2e-banner { margin: 0 20px 16px; padding: 12px 16px; border-radius: 14px; font-size: 13px; line-height: 1.4; }
+:root:not(.theme-ym) .contact-banner { padding: 12px 16px; font-size: 14px; }
+
+/* ---------- ecranul gol ---------- */
+:root:not(.theme-ym) .chat-empty { max-width: 480px; padding: 48px 32px; }
+:root:not(.theme-ym) .chat-empty .logo-bubble { margin-bottom: 32px; }
+:root:not(.theme-ym) .chat-empty h2 { margin-bottom: 16px; }
+:root:not(.theme-ym) .chat-empty p { font-size: 16px; line-height: 1.7; max-width: 360px; }
+
+/* ---------- ferestre și setări ---------- */
+:root:not(.theme-ym) .modal-card { border-radius: 20px; }
+:root:not(.theme-ym) .modal-head { padding: 20px 28px; }
+:root:not(.theme-ym) .modal-body { padding: 8px 28px 28px; }
+:root:not(.theme-ym) .set-sec { margin-bottom: 32px; }
+:root:not(.theme-ym) .set-sec h4 { margin-bottom: 12px; }
+:root:not(.theme-ym) .walls { gap: 12px; }
+:root:not(.theme-ym) .wall-collection-heading { padding: 24px 0 8px; font-size: 14px; }
+:root:not(.theme-ym) .popover { border-radius: 16px; padding: 8px; }
+
+/* ---------- desktop ---------- */
+@media (min-width: 901px) {
+  :root:not(.theme-ym):not(.mq-narrow) .sidebar { width: 320px; }
+  :root:not(.theme-ym):not(.mq-narrow) .sb-head { min-height: 80px; padding: 24px 24px 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .me-bar { margin: 8px 20px 20px; padding: 16px; gap: 16px; border-radius: 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .sb-search { margin: 0 20px 20px; }
+  :root:not(.theme-ym):not(.mq-narrow) .sb-search input { height: 44px; border-radius: 12px; padding-left: 44px; }
+  :root:not(.theme-ym):not(.mq-narrow) .sb-scroll { padding: 0 12px 24px; }
+  :root:not(.theme-ym):not(.mq-narrow) .conv { min-height: 76px; gap: 16px; padding: 14px 16px; margin-bottom: 4px; border-radius: 14px; }
+  :root:not(.theme-ym):not(.mq-narrow) .conv .avatar { --size: 48px; }
+  :root:not(.theme-ym):not(.mq-narrow) .conv-name { font-size: 15px; }
+  :root:not(.theme-ym):not(.mq-narrow) .conv-last { font-size: 13px; line-height: 1.5; }
+  :root:not(.theme-ym):not(.mq-narrow) .th-head { min-height: 80px; padding: 16px 40px; }
+  :root:not(.theme-ym):not(.mq-narrow) .th-peer { gap: 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .th-name { font-size: 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .messages { padding: 24px 8px 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .msg-col { max-width: min(82%, 900px); }
+  :root:not(.theme-ym):not(.mq-narrow) .composer { gap: 12px; padding: 20px 40px max(20px, env(safe-area-inset-bottom)); }
+  :root:not(.theme-ym):not(.mq-narrow) .cmp-input { min-height: 48px; border-radius: 24px; }
+  :root:not(.theme-ym):not(.mq-narrow) .cmp-input textarea { padding: 13px 8px 13px 20px; min-height: 48px; font-size: 15.5px; }
+  :root:not(.theme-ym):not(.mq-narrow) .contact-banner { padding: 12px 16px; }
+}
+@media (min-width: 901px) and (max-width: 1100px) {
+  :root:not(.theme-ym):not(.mq-narrow) .sidebar { width: 296px; }
+  :root:not(.theme-ym):not(.mq-narrow) .messages { padding: 24px 8px 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .th-head, :root:not(.theme-ym):not(.mq-narrow) .composer { padding-inline: 28px; }
+}
+
+/* ---------- telefon ---------- */
+@media (max-width: 900px) {
+  :root:not(.theme-ym) .bubble { padding: 9px 14px; }
+  :root:not(.theme-ym) .row.group-start { margin-top: 16px; }
+  :root:not(.theme-ym) .sep { margin: 24px 0 16px; }
+  :root:not(.theme-ym) .conv { min-height: 72px; padding: 12px; }
+}
+
+/* „Adaugă” din antet: fără această regulă textul alb rămânea pe fundal transparent */
+:root:not(.theme-ym) .sb-head .add-btn { height: 36px; padding: 0 14px 0 10px; gap: 6px; border-radius: 10px; background: var(--sent-solid); color: #fff; }
+:root:not(.theme-ym) .sb-head .add-btn .add-lbl { font-size: 13px; font-weight: 500; }
+:root:not(.theme-ym) .sb-head .add-btn:hover { background: var(--sent-solid); filter: brightness(1.08); }
+
+/* Banner de contact: o linie liniștită, nu o bară colorată pe toată lățimea */
+:root:not(.theme-ym) .contact-banner { background: var(--panel); border-bottom: 1px solid var(--line); }
+:root:not(.theme-ym) .contact-banner .btn { border-radius: 10px; }
+
+/* ---------- lista în dreapta, cu lățime reglabilă (assets/js/sidebar-resize.js) ---------- */
+.sb-resizer { display: none; }
+@media (min-width: 901px) {
+  html:not(.mq-narrow) .sidebar { position: relative; width: var(--sb-w, var(--sb-default, 320px)) !important; }
+  html:not(.mq-narrow) .sb-resizer { display: block; position: absolute; top: 0; bottom: 0; left: -4px; width: 9px; z-index: 20; cursor: col-resize; touch-action: none; }
+  html:not(.mq-narrow) .sb-resizer::after { content: ""; position: absolute; top: 0; bottom: 0; left: 4px; width: 2px; background: transparent; transition: background-color .16s ease; }
+  html:not(.mq-narrow) .sb-resizer:hover::after, html:not(.mq-narrow) .sb-resizer:focus-visible::after, html.sb-resizing .sb-resizer::after { background: var(--sent-solid, var(--accent)); }
+  html:not(.mq-narrow) .sb-resizer:focus-visible { outline: none; }
+  html.sb-resizing, html.sb-resizing * { cursor: col-resize !important; user-select: none !important; }
+  html.sb-resizing .sidebar { transition: none !important; }
+  html.theme-ym { --sb-default: 280px; }
+}
+
+/* ---------- desktop, în toate temele: două panouri identice, rotunjite și separate ---------- */
+@media (min-width: 901px) {
+  html:not(.mq-narrow):not(.theme-ym) { --panel-radius: 28px; --panel-gap: 12px; }
+  html:not(.mq-narrow):not(.theme-ym) .app { padding: var(--panel-gap) !important; gap: var(--panel-gap) !important; }
+  html:not(.mq-narrow):not(.theme-ym):not([data-wall^="liquidGlass"]) .app { background: color-mix(in srgb, var(--panel, #fff) 93%, #000); }
+  html:not(.mq-narrow):not(.theme-ym)[data-theme="dark"]:not([data-wall^="liquidGlass"]) .app { background: color-mix(in srgb, var(--panel, #000) 55%, #000); }
+  html:not(.mq-narrow):not(.theme-ym):not([data-wall^="liquidGlass"]) :is(.sidebar, .chat) {
+    border: 1px solid var(--line) !important; border-radius: var(--panel-radius) !important;
+    box-shadow: 0 10px 30px rgba(20, 28, 40, .07) !important;
+  }
+  html:not(.mq-narrow):not(.theme-ym)[data-theme="dark"]:not([data-wall^="liquidGlass"]) :is(.sidebar, .chat) { box-shadow: 0 10px 30px rgba(0, 0, 0, .35) !important; }
+  html:not(.mq-narrow):not(.theme-ym) .chat { overflow: hidden; }
+  html:not(.mq-narrow):not(.theme-ym) .sidebar { overflow: visible; }          /* mânerul de redimensionare iese în spațiul dintre panouri */
+  html:not(.mq-narrow):not(.theme-ym) .sb-head { border-radius: var(--panel-radius) var(--panel-radius) 0 0; }
+  html:not(.mq-narrow):not(.theme-ym) .sb-scroll { border-radius: 0 0 var(--panel-radius) var(--panel-radius); }
+  html:not(.mq-narrow):not(.theme-ym) .sb-resizer { left: calc(var(--panel-gap) / -2 - 4px); }
+}
+
+/* ---------- desktop, în toate temele: antetul și bara de scriere plutesc în căsuța de chat ---------- */
+@media (min-width: 901px) {
+  html:not(.mq-narrow):not(.theme-ym) .thread { position: relative; padding-top: 96px; }
+  html:not(.mq-narrow):not(.theme-ym) .messages-wrap { position: absolute; inset: 0; z-index: 1; }
+  html:not(.mq-narrow):not(.theme-ym) .messages { padding: 100px 8px 100px !important; }
+  html:not(.mq-narrow):not(.theme-ym) .th-head {
+    position: absolute; top: 12px; left: 12px; right: 12px; z-index: 6; min-height: 72px !important; padding: 12px 16px !important;
+    border-radius: 32px !important; border: 1px solid var(--line) !important; box-shadow: 0 8px 24px rgba(20, 28, 40, .10) !important;
+  }
+  html:not(.mq-narrow):not(.theme-ym) .composer {
+    position: absolute; left: 12px; right: 12px; bottom: 12px; z-index: 6; min-height: 72px; padding: 11px 16px !important;
+    border-radius: 32px !important; border: 1px solid var(--line) !important; box-shadow: 0 8px 24px rgba(20, 28, 40, .10) !important;
+  }
+  html:not(.mq-narrow):not(.theme-ym)[data-theme="dark"] :is(.th-head, .composer) { box-shadow: 0 8px 24px rgba(0, 0, 0, .35) !important; }
+  html:not(.mq-narrow):not(.theme-ym) .cmp-input { border-radius: 20px; }
+  html:not(.mq-narrow):not(.theme-ym) :is(.find-bar, .pinned-bar, .history-context, .contact-banner) {
+    position: relative; z-index: 5; margin: 0 12px 12px; padding: 12px 16px; border-radius: 16px; border: 1px solid var(--line);
+  }
+  html:not(.mq-narrow):not(.theme-ym) :is(.reply-strip, .contact-gate-notice) { position: absolute; left: 12px; right: 12px; bottom: 96px; z-index: 7; }
+  html:not(.mq-narrow):not(.theme-ym) .jump-btn { bottom: 96px; }
+  html:not(.mq-narrow):not(.theme-ym) .chat-empty { z-index: 2; }
+}
+
+/* ---------- BUZZ: butonul are doar iconița, iar bula ia culorile temei ---------- */
+.send-btn .ic-buzz b { display: none; }
+.send-btn .ic-buzz svg { width: 22px; height: 22px; }
+:root:not(.theme-ym) .bubble.buzz {
+  background: var(--sent) !important; color: var(--sent-text, #fff) !important;
+  border: 1px solid color-mix(in srgb, var(--sent-solid) 72%, #000); font-style: italic;
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--sent-solid) 30%, transparent);
+}
+:root:not(.theme-ym) .bubble.buzz b { text-shadow: none; }
+:root:not(.theme-ym) .snip-buzz { color: var(--sent-solid); }
+:root:not(.theme-ym)[data-theme="dark"] .snip-buzz { color: color-mix(in srgb, var(--sent-solid) 60%, #fff); }

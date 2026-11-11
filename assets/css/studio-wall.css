@@ -1,0 +1,57 @@
+/* Cele 20 de teme Tex: detaliile trăiesc în conversație, nu în bara de navigare. */
+:root[data-wall^="studio-"] .sidebar,
+:root[data-wall^="studio-"] .th-head,
+:root[data-wall^="studio-"] .composer,
+:root[data-wall^="studio-"] .modal-card { background:var(--panel); border-color:var(--line); backdrop-filter:none; -webkit-backdrop-filter:none; }
+:root[data-wall^="studio-"] .me-bar { background:var(--panel); box-shadow:none; }
+:root[data-wall^="studio-"] .chat { background:var(--chat-wall)!important; background-attachment:scroll; }
+:root[data-wall^="studio-"] .row.in .bubble:not(.media):not(.buzz),
+:root[data-wall^="studio-"] .row.out .bubble:not(.media):not(.buzz) { box-shadow:none; }
+:root[data-wall^="studio-"] .sep { background:var(--panel); border:1px solid var(--line); backdrop-filter:none; }
+:root[data-wall^="studio-"] .wall[data-wall^="studio-"] { background:var(--panel); }
+.wall-collection-heading { grid-column:1/-1; padding:16px 0 4px; border-top:1px solid var(--line); color:var(--muted); font-size:13px; font-weight:500; }
+/* Mostrele arată conversația, nu doar o pată de culoare. */
+.wall[data-wall^="studio-"] { padding:8px; gap:8px; background:var(--panel); border:1px solid var(--line); line-height:1.35; text-align:left; min-height:100px; transition:background-color .16s ease,border-color .16s ease; }
+.wall[data-wall^="studio-"]:hover { transform:none; border-color:var(--muted); }
+.wall[data-wall^="studio-"] .wsw { height:56px; width:100%; border:1px solid var(--line); position:relative; overflow:hidden; }
+.wall[data-wall^="studio-"] .wsw::before,.wall[data-wall^="studio-"] .wsw::after { content:""; display:block; position:absolute; height:11px; border-radius:5px; }
+.wall[data-wall^="studio-"] .wsw::before { top:12px; left:10px; width:35%; background:rgba(115,122,118,.25); }
+.wall[data-wall^="studio-"] .wsw::after { bottom:12px; right:10px; width:44%; background:#4f6872; }
+.wall[data-wall="studio-hartie"] .wsw::after { background:#365f56; }
+.wall[data-wall="studio-lut"] .wsw::after { background:#79513e; }
+.wall[data-wall="studio-salvie"] .wsw::after { background:#45624d; }
+.wall[data-wall="studio-cobalt"] .wsw::after { background:#265589; }
+.wall[data-wall="studio-miere"] .wsw::after { background:#775522; }
+.wall[data-wall="studio-prune"] .wsw::after { background:#654367; }
+.wall[data-wall="studio-ardezie"] .wsw::after { background:#52616e; }
+.wall[data-wall="studio-menta"] .wsw::after { background:#2d6a56; }
+.wall[data-wall="studio-espresso"] .wsw::after { background:#64472f; }
+.wall[data-wall="studio-atelier"] .wsw::after { background:#724d59; }
+.wall[data-wall="studio-harta"] .wsw::after { background:#445e59; }
+.wall[data-wall="studio-zen"] .wsw::after { background:#485d52; }
+.wall[data-wall="studio-ramura"] .wsw::after { background:#456654; }
+.wall[data-wall="studio-caramida"] .wsw::after { background:#8b4b3b; }
+.wall[data-wall="studio-ploaie"] .wsw::after { background:#456a7a; }
+.wall[data-wall="studio-luna"] .wsw::after { background:#595376; }
+.wall[data-wall="studio-cupru"] .wsw::after { background:#875438; }
+.wall[data-wall="studio-tihna"] .wsw::after { background:#376073; }
+.wall[data-wall="studio-fir"] .wsw::after { background:#4b645d; }
+:root[data-wall="studio-hartie"] .chat { background-size:auto; }
+:root[data-wall="studio-miere"] .chat,
+:root[data-wall="studio-menta"] .chat,
+:root[data-wall="studio-caramida"] .chat { background-size:28px 28px,auto!important; }
+:root[data-wall="studio-luna"] .chat { background-size:64px 64px,auto!important; }
+:root[data-wall="studio-harta"] .chat,
+:root[data-wall="studio-cobalt"] .chat { background-size:40px 40px,40px 40px,auto!important; }
+:root[data-wall="studio-hartie"] .row.out .bubble,
+:root[data-wall="studio-atelier"] .row.out .bubble { border-radius:8px 8px 8px 2px; }
+:root[data-wall="studio-cobalt"] .row .bubble { border-radius:7px!important; }
+:root[data-wall="studio-zen"] .row .bubble,
+:root[data-wall="studio-tihna"] .row .bubble { border-radius:16px!important; }
+:root[data-wall="studio-harta"] .row .bubble { border-radius:10px!important; }
+/* Ploaia este o singură textură discretă, nu o animație pe controale sau pe mesaje. */
+:root[data-wall="studio-ploaie"] .chat::after { content:""; position:absolute; inset:-24px 0 0; pointer-events:none; z-index:0; opacity:.13; background:repeating-linear-gradient(110deg,transparent 0 25px,rgba(237,242,245,.35) 25px 26px,transparent 26px 49px); animation:tex-rain 16s linear infinite; }
+:root[data-wall="studio-ploaie"] .thread,
+:root[data-wall="studio-ploaie"] .chat-empty { position:relative; z-index:1; }
+@keyframes tex-rain { to { transform:translateY(24px); } }
+@media (prefers-reduced-motion:reduce) { :root[data-wall="studio-ploaie"] .chat::after { animation:none; } }

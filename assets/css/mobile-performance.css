@@ -1,0 +1,73 @@
+/* Tex2.1.33: mobile render budget. Desktop look is unchanged; no layout/paint containment
+   on message rows (that would clip reactions/toolbars or change scroll anchors). */
+html.mobile-ui .th-head,
+html.mobile-ui .composer,
+html.mobile-ui .sidebar,
+html.mobile-ui .find-bar,
+html.mobile-ui .thread-header,
+html.mobile-ui .modal-backdrop,
+html.mobile-ui .modal-card,
+html.mobile-ui .popover,
+html.mobile-ui .status-pop,
+html.mobile-ui .as-panel,
+html.mobile-ui .sep,
+html.mobile-ui .sys-msg,
+html.mobile-ui .vc-ctrl,
+html.mobile-ui .pinned-bar {
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
+/* Solid theme surfaces replace sampling a scrolling scene. Keep actual text/accent/borders. */
+html.mobile-ui.has-wall .th-head,
+html.mobile-ui.has-wall .composer,
+html.mobile-ui.has-wall .find-bar { background:var(--chat-bg)!important; }
+html.mobile-ui[data-wall="liquidGlass"] .sidebar,
+html.mobile-ui[data-wall="liquidGlass"] .thread-header,
+html.mobile-ui[data-wall="liquidGlass"] .modal-card,
+html.mobile-ui[data-wall="liquidGlassDark"] .sidebar,
+html.mobile-ui[data-wall="liquidGlassDark"] .thread-header,
+html.mobile-ui[data-wall="liquidGlassDark"] .modal-card { background:var(--panel,var(--chat-bg))!important; }
+/* Low-opacity pin glass cannot remain legible without blur: explicit theme surface on phone. */
+html.mobile-ui .pinned-bar { background:var(--panel,var(--chat-bg))!important; }
+html.mobile-ui .pinned-item { background:var(--hover)!important; }
+/* Fără blur pe telefon, selectorul de emoticoane are nevoie de un fundal opac. */
+html.mobile-ui:not(.theme-ym) .emo-panel { background:var(--chat-bg,var(--panel))!important; }
+html.mobile-ui.theme-ym .emo-panel { background:var(--ym-tool,var(--panel))!important; }
+html.mobile-ui .chat,
+html.mobile-ui .sidebar,
+html.mobile-ui .composer,
+html.mobile-ui .cmp-input,
+html.mobile-ui .sb-search,
+html.mobile-ui .sb-search input,
+html.mobile-ui .me-bar,
+html.mobile-ui .row.out .bubble,
+html.mobile-ui .media-caption { background-attachment:scroll!important; }
+/* One flat, customizable Neon base replaces duplicate radial wallpapers on nested controls. */
+html.mobile-ui[data-wall="albastruNeon"] .chat,
+html.mobile-ui[data-wall="albastruNeon"] .sidebar,
+html.mobile-ui[data-wall="albastruNeon"] .composer,
+html.mobile-ui[data-wall="albastruNeon"] .cmp-input,
+html.mobile-ui[data-wall="albastruNeon"] .sb-search,
+html.mobile-ui[data-wall="albastruNeon"] .sb-search input,
+html.mobile-ui[data-wall="albastruNeon"] .me-bar { background:var(--chat-bg)!important; }
+/* Neon keeps its rectangular corners, blue stroke and customization, not four blurred shadows. */
+html.mobile-ui .msg-list .row .bubble,
+html.mobile-ui .msg-list .row .reactions,
+html.mobile-ui .pv-b { box-shadow:none!important; filter:none!important; }
+html.mobile-ui .bubble { transition:transform 100ms ease!important; }
+html.mobile-ui .cmp-input,
+html.mobile-ui .sb-search input,
+html.mobile-ui .wall,
+html.mobile-ui .pal { transition:none; }
+/* Avoid width/grid-track animation causing repeated list/composer reflow while typing. */
+html.mobile-ui .cmp-left { transition:opacity 120ms ease; }
+html.mobile-ui .reply-strip { transition:none; }
+/* Synthwave retains its CSS wallpaper; remove extra perspective/drop-shadow overlay passes. */
+html.mobile-ui[data-wall="toxicpulse"] .chat::before,
+html.mobile-ui[data-wall="toxicpulse"] .chat::after { display:none; }
+html.mobile-ui .chat-empty .logo-bubble img { animation:none; }
+/* Generic reaction badges stay light; no flame effects or particles exist. */
+html.mobile-ui .reactions { animation:none!important; }
+html.mobile-ui .thread.switching .msg-list { animation:none!important; }
+html.mobile-ui .vc-overlay[data-mode="connecting"] .vc-avatar { animation:none; }
+@media (prefers-reduced-motion:reduce) { html.mobile-ui .bubble, html.mobile-ui .cmp-left { transition:none!important; } }

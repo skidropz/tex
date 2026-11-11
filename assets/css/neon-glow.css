@@ -1,0 +1,20 @@
+/* Albastru neon: halo-ul se deplasează lent, fiecare bulă cu direcție și fază proprie.
+   Opacitatea rămâne constantă (fără puls); doar ultimele 16 halo-uri sunt animate.
+   Pe telefon și la „reduce motion” lumina rămâne statică. */
+:root[data-wall="albastruNeon"] .msg-list > .row.out .bubble:not(.media):not(.buzz)::after {
+  content: ""; position: absolute; inset: -1px; border-radius: inherit; pointer-events: none;
+  box-shadow: 0 0 12px 1px rgba(33,198,255,.6), 0 0 30px 5px rgba(0,128,255,.36);
+  opacity: var(--gi, .32);
+}
+:root[data-wall="albastruNeon"] .msg-list > .row.out:nth-last-child(-n+16) .bubble:not(.media):not(.buzz)::after {
+  animation: neon-drift var(--gd, 12s) ease-in-out var(--gdelay, -2s) infinite alternate;
+  will-change: transform;
+}
+@keyframes neon-drift {
+  from { transform: translate3d(calc(var(--gx, 2px) * -1), calc(var(--gy, 1px) * -1), 0); }
+  to { transform: translate3d(var(--gx, 2px), var(--gy, 1px), 0); }
+}
+html.mobile-ui:root[data-wall="albastruNeon"] .msg-list > .row.out .bubble::after { animation: none !important; opacity: .28 !important; will-change: auto !important; }
+@media (prefers-reduced-motion: reduce) {
+  :root[data-wall="albastruNeon"] .msg-list > .row.out .bubble::after { animation: none !important; opacity: .28 !important; will-change: auto !important; }
+}

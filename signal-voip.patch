@@ -1,0 +1,30 @@
+--- a/api/signal.php
++++ b/api/signal.php
+@@ -3,7 +3,7 @@
+ /**
+  * Semnalizare WebRTC pentru transferuri P2P și apeluri video (fișierul NU trece prin server).
+  * offer  -> creează un mesaj "p2p" în conversație (card cu Acceptă)
+- * signal -> trimite accept / SDP / ICE / cancel către celălalt peer (livrat prin long-poll)
++ * signal -> trimite accept / SDP / ICE / cancel către celălalt peer (livrat prin long-poll + VoIP push pt. iOS)
+  * status -> actualizează starea transferului în mesaj (finalizat / anulat)
+  */
+ require __DIR__ . '/../lib/bootstrap.php';
+@@ -47,13 +47,17 @@
+ 
+         $enc = json_encode($data);
+         if ($enc !== false && strlen($enc) > 200000) json_error('Semnal prea mare');
++        $cleanTid = preg_replace('/[^A-Za-z0-9_-]/', '', (string)($in['transfer_id'] ?? ''));
+         push_event([$to], 'signal', [
+             'from' => $uid,
+-            'transfer_id' => preg_replace('/[^A-Za-z0-9_-]/', '', (string)($in['transfer_id'] ?? '')),
++            'transfer_id' => $cleanTid,
+             'message_id' => (int)($in['message_id'] ?? 0),
+             'kind' => $kind,
+             'data' => $data,
+         ]);
++        if (function_exists('apns_notify_call_signal')) {
++            apns_notify_call_signal($uid, $to, $kind, $cleanTid, $data);
++        }
+         json_out(['ok' => true]);
+ 
+     case 'status':

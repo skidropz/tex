@@ -1,0 +1,28 @@
+/* Tex 2.1.32: login footer and review-only legal document. Theme variables are inherited. */
+.login-footer { margin:20px 0 0; text-align:center; color:var(--text); font-size:13px; line-height:1.6; overflow-wrap:anywhere; }
+.login-footer p { margin:0 0 6px; }
+.login-footer .legal-link { display:inline-block; padding:8px 4px; color:var(--text); text-decoration:underline; text-underline-offset:3px; }
+.login-footer .legal-link:hover { color:var(--accent); }
+.login-footer .legal-link:focus-visible, .legal-dialog :focus-visible { outline:3px solid var(--accent); outline-offset:3px; }
+.legal-dialog[hidden] { display:none!important; }
+.legal-dialog { position:fixed; inset:0; bottom:auto; top:var(--legal-top,0px); height:100vh; height:var(--legal-height,100vh); box-sizing:border-box; z-index:1500; display:flex; justify-content:center; align-items:center; padding:12px; padding:max(12px,env(safe-area-inset-top)) max(12px,env(safe-area-inset-right)) max(12px,env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left)); background:rgba(0,0,0,.6); color:var(--text); text-align:left; }
+.legal-dialog *, .legal-dialog *::before, .legal-dialog *::after { box-sizing:border-box; }
+.legal-card { width:100%; max-width:860px; min-width:0; max-height:100%; max-height:min(900px,100%); display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); border-radius:16px; background:var(--card); color:var(--text); box-shadow:0 16px 50px rgba(0,0,0,.3); }
+.legal-head { flex:0 0 auto; display:flex; align-items:center; gap:16px; padding:18px 20px; border-bottom:1px solid var(--line); background:var(--card); }
+.legal-head h2 { min-width:0; flex:1; font-size:19px; line-height:1.35; color:inherit; overflow-wrap:anywhere; }
+.legal-close { flex:0 0 auto; min-height:44px; border:1px solid var(--line); border-radius:9px; padding:10px 12px; background:var(--input); color:var(--text); font:inherit; font-size:14px; font-weight:600; line-height:1.3; cursor:pointer; }
+.legal-close:hover { border-color:var(--accent); }
+.legal-body { flex:1 1 auto; min-height:0; min-width:0; overflow:auto; overscroll-behavior:contain; padding:20px 24px 28px; font-size:15px; line-height:1.65; overflow-wrap:anywhere; -webkit-text-size-adjust:100%; }
+.legal-body h3 { margin:26px 0 12px; font-size:18px; line-height:1.4; color:inherit; scroll-margin-top:16px; }
+.legal-body p { margin:0 0 14px; }
+.legal-body ul { padding-left:22px; margin:0 0 16px; }
+.legal-body li { margin:0 0 12px; }
+.legal-body a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.legal-body a:hover { text-decoration-thickness:2px; }
+.legal-body code { color:inherit; font-size:.92em; }
+.legal-body .legal-draft { padding:14px 16px; border:2px solid var(--accent); border-radius:10px; background:var(--input); color:var(--text); }
+.legal-toc { display:flex; flex-wrap:wrap; gap:10px 18px; margin:20px 0; }
+.legal-toc a { padding:4px 0; }
+.legal-missing { border-left:3px solid var(--accent); }
+@media (max-width:480px) { .legal-head { gap:10px; padding:12px; } .legal-head h2 { font-size:17px; } .legal-body { padding:16px 16px 24px; font-size:16px; } .legal-card { border-radius:12px; } .legal-toc { gap:8px 14px; } }
+@media (prefers-reduced-motion:reduce) { .legal-dialog, .legal-dialog *, .login-footer * { scroll-behavior:auto!important; transition:none!important; animation:none!important; } }

@@ -1,0 +1,70 @@
+/* Tex 2.2 — uniformitate: aceleași raze, înălțimi și margini în toate elementele (temele Yahoo clasice rămân neatinse).
+   Scară: controale 12px · rânduri și carduri 16px · panouri 28px · bare plutitoare 32px.
+   Înălțimi: buton 40 (mic 32) · câmp 44 · bară plutitoare 72. Spațiu: multipli de 4, margine de panou 20. */
+:root:not(.theme-ym) { --r-ctl: 12px; --r-card: 16px; --h-ctl: 40px; --h-ctl-sm: 32px; --h-input: 44px; }
+
+:root:not(.theme-ym) .icon-btn { width: var(--h-ctl); height: var(--h-ctl); border-radius: var(--r-ctl) !important; }
+:root:not(.theme-ym) .icon-btn.small { width: var(--h-ctl-sm); height: var(--h-ctl-sm); }
+:root:not(.theme-ym) .conv-more { width: var(--h-ctl-sm); height: var(--h-ctl-sm); border-radius: var(--r-ctl); }
+:root:not(.theme-ym) .btn { min-height: var(--h-ctl); border-radius: var(--r-ctl); }
+:root:not(.theme-ym) .btn.small, :root:not(.theme-ym) .contact-banner .btn, :root:not(.theme-ym) .find-bar .btn { min-height: var(--h-ctl-sm); padding-block: 0; border-radius: var(--r-ctl) !important; }
+:root:not(.theme-ym) .sb-head .add-btn { width: auto; height: var(--h-ctl); padding: 0 14px 0 10px; border-radius: var(--r-ctl); }
+:root:not(.theme-ym) .send-btn { width: var(--h-ctl); height: var(--h-ctl); border-radius: var(--r-ctl) !important; }
+:root:not(.theme-ym) .sb-search input, :root:not(.theme-ym) .field input, :root:not(.theme-ym) .sp-msg input { height: var(--h-input); border-radius: var(--r-ctl); }
+:root:not(.theme-ym) .me-bar, :root:not(.theme-ym) .e2e-banner, :root:not(.theme-ym) .conv, :root:not(.theme-ym) .contact-banner { border-radius: var(--r-card); }
+:root:not(.theme-ym) .sep { border-radius: 999px; padding: 2px 12px; }
+:root:not(.theme-ym) .popover, :root:not(.theme-ym) .as-panel { border-radius: var(--r-card); }
+:root:not(.theme-ym) .modal-card { border-radius: 24px; }
+
+@media (min-width: 901px) {
+  /* același margine interioară pe toată coloana din dreapta: 20px, iar conținutul rândurilor stă pe aceeași linie */
+  :root:not(.theme-ym):not(.mq-narrow) .sb-head { min-height: 80px; padding: 20px; }
+  :root:not(.theme-ym):not(.mq-narrow) .me-bar { margin: 8px 20px 20px; padding: 15px; }
+  :root:not(.theme-ym):not(.mq-narrow) .sb-search, :root:not(.theme-ym):not(.mq-narrow) .e2e-banner { margin-inline: 20px; }
+  :root:not(.theme-ym):not(.mq-narrow) .sb-scroll { padding: 0 20px 24px; }
+  :root:not(.theme-ym):not(.mq-narrow) .conv-heading { padding: 12px 16px 8px; }
+  :root:not(.theme-ym):not(.mq-narrow) .conv { padding: 14px 16px; }
+  :root:not(.theme-ym):not(.mq-narrow) .th-head { padding: 12px 16px !important; }
+  :root:not(.theme-ym):not(.mq-narrow) .cmp-input { min-height: 48px; }
+  :root:not(.theme-ym):not(.mq-narrow) .cmp-input textarea { min-height: 46px; padding-block: 12px; }
+}
+
+/* meniul de status: aceeași coloană pentru bulină și text, aceleași spații între rânduri */
+:root:not(.theme-ym) .status-pop { display: flex; flex-direction: column; gap: 8px; padding: 8px; }
+:root:not(.theme-ym) .status-pop[hidden] { display: none; }
+:root:not(.theme-ym) .sp-types { display: grid; gap: 4px; }
+:root:not(.theme-ym) .sp-types button { display: grid; grid-template-columns: 12px 1fr; column-gap: 12px; align-items: center; padding: 10px 12px; border-radius: var(--r-ctl); }
+:root:not(.theme-ym) .sp-types button .sdot { margin: 0; width: 12px; height: 12px; justify-self: center; }
+:root:not(.theme-ym) .sp-types button span { display: block; min-width: 0; }
+:root:not(.theme-ym) .sp-msg { margin: 4px 4px 8px; gap: 8px; }
+:root:not(.theme-ym) .sp-msg.is-locked { opacity: .55; }
+:root:not(.theme-ym) .sp-msg input:disabled { cursor: not-allowed; }
+:root:not(.theme-ym) .status-pop .btn.wide { width: 100%; margin: 0; }
+:root:not(.theme-ym) .status-pop .btn:disabled { opacity: .5; cursor: not-allowed; }
+:root:not(.theme-ym) .msg-actions .icon-btn { width: var(--h-ctl-sm); height: var(--h-ctl-sm); }
+
+/* listă îngustă: butonul „Adaugă” rămâne doar cu iconița, ca antetul să nu se taie */
+.sidebar.is-compact .sb-head .add-lbl { display: none; }
+.sidebar.is-compact .sb-head .add-btn { width: var(--h-ctl); padding: 0; justify-content: center; }
+.sidebar.is-compact .sb-head { gap: 4px; }
+
+/* bara de scriere și antetul: aceeași înălțime (72), conținut centrat, aceeași linie în stânga */
+:root:not(.theme-ym) .th-peer { padding: 0; gap: 12px; }
+:root:not(.theme-ym) .composer { align-items: flex-end; gap: 12px; }
+:root:not(.theme-ym) .composer > :not(.cmp-input) { margin-bottom: 4px; }
+:root:not(.theme-ym) .cmp-left { gap: 4px; align-items: center; }
+:root:not(.theme-ym) .cmp-input { align-items: flex-end; }
+:root:not(.theme-ym) .cmp-input .emo-btn { margin: 0 3px 3px 0; }
+:root:not(.theme-ym) .cmp-left { height: var(--h-ctl); max-width: 148px; }
+:root:not(.theme-ym) .composer.has-text .cmp-left { max-width: var(--h-ctl); }
+
+/* notificările din conversație: aceeași distanță față de antet, față de margini și între ele (12px), același padding interior */
+:root:not(.theme-ym):not(.mq-narrow) :is(.find-bar, .pinned-bar, .history-context, .contact-banner) { margin: 0 12px 12px; padding: 12px 16px; gap: 12px; min-height: 56px; align-items: center; border-radius: var(--r-card); }
+:root:not(.theme-ym):not(.mq-narrow) .contact-banner span { min-width: 0; }
+:root:not(.theme-ym):not(.mq-narrow) .contact-banner .btn, :root:not(.theme-ym) .contact-banner .btn { padding-inline: 14px; }
+:root:not(.theme-ym) .contact-banner { gap: 12px; }
+:root:not(.theme-ym):not(.mq-narrow):not([data-wall^="liquidGlass"]) :is(.find-bar, .pinned-bar, .history-context) { background: var(--panel); border: 1px solid var(--line); }
+:root:not(.theme-ym):not(.mq-narrow) .reply-strip { border-top: 0; border-radius: var(--r-card); }
+:root:not(.theme-ym):not(.mq-narrow) .reply-strip.on { background: var(--panel); border: 1px solid var(--line); }
+:root:not(.theme-ym):not(.mq-narrow) .reply-strip.on .reply-inner { padding: 12px 16px; }
+:root:not(.theme-ym):not(.mq-narrow) .contact-gate-notice { padding: 12px 16px; border-radius: var(--r-card); border: 1px solid var(--line); background: var(--panel); }

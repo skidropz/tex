@@ -1,0 +1,102 @@
+/* Tex 2.2 — temele „Yahoo! Messenger”: fereastra de conversație ca în clientul clasic.
+   Mesajele sunt rânduri „nume: text” (fără bule), fereastra are bară mov, zona de scris are
+   chenar înfundat și butonul de trimitere are aspectul butoanelor Windows din epoca respectivă.
+   Se aplică doar când este activă una dintre temele YM; restul temelor nu sunt atinse. */
+
+html.theme-ym {
+  --ym-font: Tahoma, Verdana, "Segoe UI", Geneva, sans-serif;
+  --ym-bg: #ffffff; --ym-ink: #000000; --ym-muted-ink: #6f6682;
+  --ym-me: #cc0000; --ym-peer: #0a2fb4;
+  --ym-bar: linear-gradient(180deg, #8e2fb0 0%, #6a0d8a 45%, #3c0a5a 100%);
+  --ym-tool: #ece9f1; --ym-tool-line: #b9adc9; --ym-field: #ffffff;
+  --ym-btn: linear-gradient(180deg, #ffffff 0%, #e8e2f0 48%, #d3c9e2 52%, #e4ddee 100%); --ym-btn-line: #6f5c8c; --ym-btn-ink: #3c0a5a;
+  --ym-note: #fff7c2; --ym-note-line: #e1d27a;
+}
+html.theme-ym-dark {
+  --ym-bg: var(--ymd-bg); --ym-ink: var(--ymd-text); --ym-muted-ink: var(--ymd-muted);
+  --ym-me: #ff8c8c; --ym-peer: #8fb2ff;
+  --ym-bar: var(--ymd-head); --ym-tool: var(--ymd-panel); --ym-tool-line: var(--ym-line); --ym-field: var(--ymd-input);
+  --ym-btn: var(--ymd-active); --ym-btn-line: var(--ymd-edge); --ym-btn-ink: var(--ymd-active-text);
+  --ym-note: #3a3010; --ym-note-line: #6b5a1c;
+}
+
+/* ---------- fereastra ---------- */
+html.theme-ym .chat { background: var(--ym-bg) !important; font-family: var(--ym-font); color: var(--ym-ink); }
+html.theme-ym .th-head { background: var(--ym-bar); color: #fff; min-height: 48px; padding: 6px 10px; border: 0; box-shadow: inset 0 -1px 0 rgba(255,255,255,.28), 0 1px 0 rgba(0,0,0,.35); backdrop-filter: none; }
+html.theme-ym .th-name { color: #fff; font: 700 13px var(--ym-font); text-shadow: 1px 1px 0 rgba(0,0,0,.35); }
+html.theme-ym .th-status, html.theme-ym .th-status * { color: rgba(255,255,255,.88); font: 11px var(--ym-font); }
+html.theme-ym .th-head .avatar { --size: 32px; border-radius: 2px; box-shadow: 0 0 0 1px rgba(255,255,255,.6); }
+html.theme-ym .th-head .icon-btn, html.theme-ym .th-head .icon-btn.accent { color: #fff; border-radius: 3px; width: 30px; height: 30px; }
+html.theme-ym .th-head .icon-btn:hover { background: rgba(255,255,255,.2); }
+html.theme-ym .back-btn { display: none; }
+html.mq-narrow.theme-ym .back-btn { display: inline-flex; }
+html.theme-ym .contact-banner { background: var(--ym-note); border-bottom: 1px solid var(--ym-note-line); color: var(--ym-ink); font: 11px var(--ym-font); padding: 4px 10px; }
+html.theme-ym .contact-banner .btn { border-radius: 3px; font: 11px var(--ym-font); padding: 2px 10px; background: var(--ym-btn); color: var(--ym-btn-ink); border: 1px solid var(--ym-btn-line); }
+
+/* ---------- jurnalul de conversație ---------- */
+html.theme-ym .messages { padding: 8px 8px 6px; font: 13px/1.45 var(--ym-font); box-shadow: inset 1px 1px 0 #7f7f7f, inset -1px 0 0 #fff; }
+html.theme-ym-dark .messages { box-shadow: inset 1px 1px 0 #000, inset -1px 0 0 var(--ym-line); }
+html.theme-ym .row { margin-top: 2px; gap: 0; justify-content: flex-start; padding: 0 !important; align-items: flex-start; }
+html.theme-ym .row.group-start { margin-top: 2px; }
+html.theme-ym .row .avatar-slot { display: none; }
+html.theme-ym .msg-col { max-width: 100% !important; align-items: flex-start !important; }
+html.theme-ym .bubble-wrap, html.theme-ym .row.out .bubble-wrap { flex-direction: row; gap: 8px; }
+html.theme-ym .row .bubble.has-text { background: transparent !important; color: var(--ym-ink) !important; padding: 0 !important; border-radius: 0 !important; box-shadow: none !important; font: 13px/1.45 var(--ym-font); }
+html.theme-ym .row .bubble.has-text::before { content: attr(data-who) ": "; font-weight: 700; }
+html.theme-ym .row.in .bubble.has-text::before { color: var(--ym-peer); }
+html.theme-ym .row.out .bubble.has-text::before { color: var(--ym-me); }
+html.theme-ym .row .bubble.has-text a { color: #0033cc; }
+html.theme-ym-dark .row .bubble.has-text a { color: #9bbcff; }
+html.theme-ym .row .bubble:not(.has-text):not(.media):not(.buzz) { border-radius: 3px; box-shadow: none; }
+html.theme-ym .row .bubble img.ym { height: 18px; vertical-align: -4px; }
+html.theme-ym .row .msg-time { color: var(--ym-muted-ink); font: 10px var(--ym-font); }
+html.theme-ym .row .status-slot { opacity: .8; }
+html.theme-ym .sep { background: none !important; border: 0 !important; color: var(--ym-muted-ink); font: italic 11px var(--ym-font); margin: 10px 0 6px; padding: 0; }
+html.theme-ym .conv-intro { padding: 12px 0; text-align: left; }
+html.theme-ym .conv-intro > :not(.e2e-intro) { display: none; }
+html.theme-ym .conv-intro .e2e-intro { display: block; margin: 0; color: var(--ym-muted-ink); font: italic 11px var(--ym-font); }
+html.theme-ym .msg-list { margin-top: 0; }
+html.theme-ym .reply-quote { border-left: 2px solid var(--ym-tool-line); background: transparent; font-size: 12px; }
+html.theme-ym .typing-bubble { background: transparent; box-shadow: none; }
+
+/* ---------- zona de scris ---------- */
+html.theme-ym .composer { background: var(--ym-tool); border-top: 1px solid var(--ym-tool-line); box-shadow: inset 0 1px 0 #fff; padding: 6px 8px max(6px, env(safe-area-inset-bottom)); gap: 6px; align-items: flex-end; }
+html.theme-ym-dark .composer { box-shadow: none; }
+html.theme-ym .composer .icon-btn { width: 28px; height: 28px; border-radius: 3px; color: var(--ym-btn-ink); }
+html.theme-ym .composer .icon-btn:hover { background: rgba(106,13,138,.12); box-shadow: inset 0 0 0 1px var(--ym-btn-line); }
+html.theme-ym .cmp-input { background: var(--ym-field); border: 0; border-radius: 0; min-height: 34px; box-shadow: inset 1px 1px 0 #7f7f7f, inset 2px 2px 0 #404040, inset -1px -1px 0 #fff, inset -2px -2px 0 #d4d0dc; }
+html.theme-ym-dark .cmp-input { box-shadow: inset 1px 1px 0 #000, inset -1px -1px 0 var(--ym-line); }
+html.theme-ym .cmp-input textarea { font: 13px/1.4 var(--ym-font); color: var(--ym-ink); padding: 8px 8px 8px 10px; min-height: 34px; }
+html.theme-ym .send-btn { width: auto; min-width: 44px; height: 34px; padding: 0 12px; border-radius: 3px; background: var(--ym-btn) !important; color: var(--ym-btn-ink) !important; border: 1px solid var(--ym-btn-line); box-shadow: inset 0 1px 0 rgba(255,255,255,.8), 0 1px 0 rgba(0,0,0,.18); font: 700 12px var(--ym-font); }
+html.theme-ym .send-btn:active { transform: none; box-shadow: inset 1px 1px 2px rgba(0,0,0,.3); }
+html.theme-ym .send-btn .ic-buzz b { font: 700 11px var(--ym-font); letter-spacing: 0; color: #b4001e; }
+html.theme-ym-dark .send-btn .ic-buzz b { color: inherit; }
+html.theme-ym .send-btn svg { fill: currentColor; }
+
+/* ---------- lista de prieteni ---------- */
+html.theme-ym .conv-list::before { display: none; }
+html.theme-ym .conv-heading { display: block; margin: 0; padding: 3px 8px; font: 700 11px var(--ym-font); text-transform: none; letter-spacing: 0; color: #2b0a44; background: linear-gradient(180deg, #f4f1f8, #d9d0e6); border-top: 1px solid #fff; border-bottom: 1px solid var(--ym-line); }
+html.theme-ym .conv-heading::before { content: "\25BE\00a0"; }
+html.theme-ym-dark .conv-heading { color: #ffd400; background: var(--ymd-group); border-top-color: var(--ym-line); }
+html.theme-ym .conv-list { font-family: var(--ym-font); }
+html.theme-ym .conv.unread .conv-name { color: #b4001e; }
+html.theme-ym .tag-new { display: none; }
+html.theme-ym .sidebar { font-family: var(--ym-font); }
+html.theme-ym .sb-head h1 { font-family: var(--ym-font); }
+html.theme-ym .me-status, html.theme-ym .sb-search input { font-family: var(--ym-font); }
+html.theme-ym .sb-head, html.theme-ym .me-bar, html.theme-ym .sb-search { border-radius: 0; }
+
+/* ---------- aspect clasic: panouri drepte, fără colțuri rotunjite, fără elemente plutitoare ---------- */
+html.theme-ym .app { padding: 0; gap: 0; }
+html.theme-ym .sidebar, html.theme-ym .chat { border-radius: 0; box-shadow: none; }
+html.theme-ym .sidebar { border: 0; border-left: 2px solid var(--ym-purple2); }
+html.theme-ym .sb-head, html.theme-ym .sb-scroll { border-radius: 0; }
+html.theme-ym .th-head, html.theme-ym .composer { border-radius: 0; }
+
+/* ---------- BUZZ: doar text roșu, înclinat ---------- */
+html.theme-ym .bubble.buzz { background: none !important; border: 0 !important; box-shadow: none !important; padding: 0 !important; border-radius: 0 !important; animation: none !important; color: var(--ym-me) !important; display: inline-block; }
+html.theme-ym .bubble.buzz .bz-ic { display: none; }
+html.theme-ym .bubble.buzz b { font: italic 400 13px var(--ym-font); letter-spacing: 0; text-shadow: none; color: inherit; }
+html.theme-ym .snip-buzz { color: var(--ym-me); font-weight: 400; font-style: italic; }
+html.theme-ym .conv.active .snip-buzz { color: #ffd2d2; }
+html.theme-ym .row .bubble.buzz::before { content: none; }

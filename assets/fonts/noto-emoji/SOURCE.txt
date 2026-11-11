@@ -1,0 +1,4 @@
+Official Google Fonts Noto Emoji monochrome, family Noto Emoji, Version 3.002.
+https://raw.githubusercontent.com/google/fonts/main/ofl/notoemoji/NotoEmoji%5Bwght%5D.ttf
+https://raw.githubusercontent.com/google/fonts/main/ofl/notoemoji/OFL.txt
+Downloaded 7 November 2026 Europe/Bucharest. Original unmodified variable TTF. SIL OFL1.1 in OFL.txt.
