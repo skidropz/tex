@@ -8,7 +8,7 @@ per-message replies and reactions, presence, and Romanian/English strings. Messa
 end-to-end encrypted, so the server stores ciphertext it cannot read. Large files skip the server
 entirely over WebRTC.
 
-There is also an Android client that runs this same front end inside a WebView; it lives in a
+There is also an Android client that runs this same front end inside a WebView, it lives in a
 separate repository and is not part of this one.
 
 ---
@@ -35,33 +35,45 @@ separate repository and is not part of this one.
 ## Screens
 
 <p align="center">
-  <img src="docs/screenshots/web-02-lista-mobil.png" width="24%" alt="Conversation list">
-  <img src="docs/screenshots/web-03-conversatie-mobil.png" width="24%" alt="Conversation">
-  <img src="docs/screenshots/web-05-setari.png" width="24%" alt="Settings">
-  <img src="docs/screenshots/web-04-desktop.png" width="24%" alt="Desktop layout">
+  <img src="docs/screenshots/1.png" width="24%" alt="Conversation list">
+  <img src="docs/screenshots/2.png" width="24%" alt="Conversation">
+  <img src="docs/screenshots/3.png" width="24%" alt="Settings">
+  <img src="docs/screenshots/4.png" width="24%" alt="Desktop layout">
 </p>
 
 ## Features
 
-**Messaging.** 1:1 and group conversations, long-poll delivery, typing indicators, sent / delivered
+**Messaging.**
+
+1:1 and group conversations, long-poll delivery, typing indicators, sent / delivered
 / read receipts, replies, emoji reactions, message editing, pinned messages, in-conversation search,
 lightbox previews for images and video.
 
-**Files.** Chunked uploads with resume, original quality (no re-encoding), served back through
+**Files.**
+
+Chunked uploads with resume, original quality (no re-encoding), served back through
 `api/file.php` with Range support so video seeks work. Anything large can instead go peer-to-peer
 over a WebRTC data channel, in which case the bytes never traverse the server.
 
-**Calls.** 1:1 audio/video over WebRTC, signalled through the same long-poll. SDP and ICE are
+**Calls.**
+
+1:1 audio/video over WebRTC, signalled through the same long-poll. SDP and ICE are
 sealed inside the E2E envelope when the conversation is encrypted.
 
-**Encryption.** ECDH P-256 key agreement, HKDF-SHA256, AES-256-GCM. The private key is stored on the
+**Encryption.**
+
+ECDH P-256 key agreement, HKDF-SHA256, AES-256-GCM. The private key is stored on the
 server only as ciphertext wrapped with a password-derived key (PBKDF2-SHA256, 310,000 iterations by
 default). Group keys are wrapped per member.
 
-**Presence.** Available / Busy / Away / Invisible, delivered as events. Going invisible actually
+**Presence.**
+
+Available / Busy / Away / Invisible, delivered as events. Going invisible actually
 hides the connection, including on devices that are still sending heartbeats.
 
-**Appearance.** Several palettes and wallpapers, light and dark, Liquid Glass and Yahoo! Messenger
+**Appearance.**
+
+Several palettes and wallpapers, light and dark, Liquid Glass and Yahoo! Messenger
 classic skins, reduced-motion handling, per-user zoom.
 
 ## Requirements
@@ -82,11 +94,11 @@ No Composer, no npm, no build step. The front end is served as-is.
 
 Copy the application into `public_html` or a subfolder (for example `public_html/chat`). Two dotfiles
 matter and are easy to miss: `.htaccess` (HTTPS redirect, security headers, blocked paths) and
-`.user.ini`. Enable **Settings → Show Hidden Files** in cPanel's File Manager to see them.
+`.user.ini`. Enable **Settings -> Show Hidden Files** in cPanel's File Manager to see them.
 
 ### 2. Create the database
 
-cPanel → **MySQL® Database Wizard**. Create a database, create a user with `ALL PRIVILEGES` on it,
+cPanel -> **MySQL Database Wizard**. Create a database, create a user with `ALL PRIVILEGES` on it,
 and note the three values. On cPanel they are prefixed with your account name
 (`account_chat`, `account_chatuser`).
 
@@ -101,7 +113,7 @@ cleaner.
 
 ### 4. HTTPS
 
-Issue a certificate from cPanel (**SSL/TLS Status → AutoSSL**, or Let's Encrypt) and leave
+Issue a certificate from cPanel (**SSL/TLS Status -> AutoSSL**, or Let's Encrypt) and leave
 `force_https` and `hsts` enabled in the config. The redirect in `.htaccess` excludes
 `/.well-known/` so certificate validation keeps working, and it respects `X-Forwarded-Proto` behind
 Cloudflare or another proxy.
@@ -183,29 +195,22 @@ On macOS: `brew install php`. On Debian/Ubuntu: `apt install php-cli php-sqlite3
 
 ## Architecture
 
-```
-browser ──HTTPS──► Apache + .htaccess ──► index.php / login.php / admin.php
-                        │
-                        ├── api/*.php        JSON endpoints (session + CSRF)
-                        └── lib/*.php        shared code, no routing of its own
-                                 │
-                                 ▼
-                          MySQL / MariaDB
-                          (SQLite in demo)
-```
-
 There is no framework and no router beyond `.htaccess`. Each request enters one file under `api/`,
 which includes `lib/bootstrap.php` and returns JSON. `lib/bootstrap.php` opens the database, creates
 or migrates the schema on first use, starts the session, and provides the helpers every endpoint
 uses: `require_auth()`, `require_member()`, `input()`, `json_out()`, `push_event()`,
 `create_message()`.
 
-**Realtime is long-polling.** `api/poll.php` holds the connection open for `poll_timeout` seconds and
+**Realtime is long-polling.**
+
+`api/poll.php` holds the connection open for `poll_timeout` seconds and
 returns whatever events appeared for the current user. This works on shared hosting where WebSockets
 and background workers are unavailable. Messages, receipts, typing, presence and WebRTC signals all
 ride that one channel, which is why presence and call invitations survive a page reload.
 
-**Open tabs cooperate.** Interaction timestamps are reconciled across tabs and devices, so closing
+**Open tabs cooperate.**
+
+Interaction timestamps are reconciled across tabs and devices, so closing
 one tab is not a logout and an idle browser does not overwrite an active one.
 
 **The front end** in `assets/` is plain ES modules-free JavaScript: `app.js` for the chat, `e2e.js`
@@ -225,7 +230,7 @@ session cookie. Errors come back as `{"ok":false,"error":"..."}` with an appropr
 | `api/poll.php` | long-poll event stream; `init=1` returns a cursor without waiting |
 | `api/contacts.php` | contact list, add, remove, aliases, ignore |
 | `api/users.php` | global user search for the Add dialog |
-| `api/upload.php` | chunked upload: `init` → `chunk` (repeated) → `finish`, with resume |
+| `api/upload.php` | chunked upload: `init` → `chunk` (repeated) -> `finish`, with resume |
 | `api/file.php` | download for conversation members, Range support, correct MIME |
 | `api/keys.php` | E2E key registry: `mine`, `pub`, `setup`, `verify`, `conv`, `wrap` |
 | `api/signal.php` | WebRTC signalling: `offer`, `signal`, `status` |
@@ -262,7 +267,7 @@ IV, key version and tag context. The server never stores a plaintext body for th
 
 What is implemented:
 
-- **Prepared statements** everywhere; no string-built SQL with user input.
+- **Prepared statements** everywhere, no string-built SQL with user input.
 - **CSRF tokens** on every mutating request, rotated per session.
 - **Password hashing** with `password_hash()` (bcrypt). Minimum 12 characters, capped at 72 bytes.
 - **Session hardening**: HttpOnly, SameSite=Lax, `secure` when HTTPS is on,
